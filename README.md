@@ -23,8 +23,6 @@
 Plugin:
 
 ```shell
-asdf plugin add depot
-# or
 asdf plugin add depot https://github.com/depot/asdf-depot.git
 ```
 
