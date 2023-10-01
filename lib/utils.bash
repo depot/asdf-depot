@@ -69,13 +69,27 @@ install_version() {
   )
 }
 
+# Implementation taken from
+# https://stackoverflow.com/a/4024263
+verlte() {
+    [  "$1" = "`echo -e "$1\n$2" | sort -V | head -n1`" ]
+}
+
+verlt() {
+    [ "$1" = "$2" ] && return 1 || verlte $1 $2
+}
+
 get_tarball_name() {
   local version="$1"
   local os="$(uname -s | tr '[:upper:]' '[:lower:]')"
   local arch="$(uname -m)"
 
   if [[ "$os" == "darwin" ]]; then
-    os="macOS"
+    # depot/cli PR #150 changed the release naming convention
+    # https://github.com/depot/cli/pull/150
+    if verlt "$version" "2.21.2"; then
+      os="macOS"
+    fi
   fi
 
   if [[ "$arch" == "arm64" ]] || [[ "$arch" == "aarch64" ]]; then
