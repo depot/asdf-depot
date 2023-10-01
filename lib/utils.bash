@@ -72,11 +72,11 @@ install_version() {
 # Implementation taken from
 # https://stackoverflow.com/a/4024263
 verlte() {
-    [  "$1" = "`echo -e "$1\n$2" | sort -V | head -n1`" ]
+  [  "$1" = "`echo -e "$1\n$2" | sort -V | head -n1`" ]
 }
 
 verlt() {
-    [ "$1" = "$2" ] && return 1 || verlte $1 $2
+  [ "$1" = "$2" ] && return 1 || verlte $1 $2
 }
 
 get_tarball_name() {
